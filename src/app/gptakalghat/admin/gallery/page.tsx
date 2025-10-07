@@ -18,25 +18,23 @@ export default function GalleryPage() {
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("❌ Error fetching gallery:", error);
-    } else {
-      const urls =
-        data?.map((row) => {
-          const { data: urlData } = supabase.storage
-            .from("gallery")
-            .getPublicUrl(row.image_url);
-          return urlData.publicUrl;
-        }) || [];
-
-      setGallery(urls);
+      console.error("❌ Error fetching gallery:", error.message);
+      return;
     }
+
+    const urls =
+      data?.map((row) =>
+        supabase.storage.from("gallery").getPublicUrl(row.image_url).data.publicUrl
+      ) || [];
+
+    setGallery(urls);
   };
 
   useEffect(() => {
     fetchGallery();
   }, []);
 
-  // 📌 Handle file select
+  // 📌 Handle file selection
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -45,39 +43,41 @@ export default function GalleryPage() {
     }
   };
 
-  // 📌 Save file
+  // 📌 Save file to Storage + DB
   const handleSave = async () => {
     if (!file) return;
 
     const filePath = `${Date.now()}-${file.name}`;
 
-    // Upload
+    // Upload to Storage
     const { error: storageError } = await supabase.storage
       .from("gallery")
       .upload(filePath, file);
 
     if (storageError) {
-      console.error("❌ Upload Error:", storageError);
+      console.error("❌ Storage Upload Error:", storageError.message);
       return;
     }
 
-    // Save DB
+    // Insert into DB
     const { error: dbError } = await supabase
       .from("gallery")
       .insert([{ image_url: filePath }]);
 
     if (dbError) {
-      console.error("❌ Database Error:", dbError);
-    } else {
-      const { data: urlData } = supabase.storage
-        .from("gallery")
-        .getPublicUrl(filePath);
-
-      setGallery([urlData.publicUrl, ...gallery]);
-      setFile(null);
-      setPreview(null);
-      setIsModalOpen(false);
+      console.error("❌ Database Insert Error:", dbError.message);
+      return;
     }
+
+    // Update gallery state
+    const { data: urlData } = supabase.storage
+      .from("gallery")
+      .getPublicUrl(filePath);
+
+    setGallery([urlData.publicUrl, ...gallery]);
+    setFile(null);
+    setPreview(null);
+    setIsModalOpen(false);
   };
 
   // 📌 Delete image
@@ -85,8 +85,16 @@ export default function GalleryPage() {
     const filePath = url.split("/gallery/")[1];
     if (!filePath) return;
 
-    await supabase.storage.from("gallery").remove([filePath]);
-    await supabase.from("gallery").delete().eq("image_url", filePath);
+    const { error: storageError } = await supabase.storage
+      .from("gallery")
+      .remove([filePath]);
+    if (storageError) console.error("❌ Storage Delete Error:", storageError.message);
+
+    const { error: dbError } = await supabase
+      .from("gallery")
+      .delete()
+      .eq("image_url", filePath);
+    if (dbError) console.error("❌ DB Delete Error:", dbError.message);
 
     setGallery(gallery.filter((_, i) => i !== index));
   };
@@ -97,7 +105,7 @@ export default function GalleryPage() {
         🖼️ Manage Gallery
       </h1>
 
-      {/* Add Button */}
+      {/* Add Image Button */}
       <button
         onClick={() => setIsModalOpen(true)}
         className="mb-4 px-4 py-2 bg-[#14919B] hover:bg-[#0B6477] text-white rounded"

@@ -50,7 +50,7 @@ export default function AboutPage() {
           transition={{ duration: 0.8 }}
         >
           <p className="text-base md:text-xl font-bold text-green-900 leading-relaxed">
-            At Gram Panchayat Takalghat, our mission is to promote inclusive growth, empower citizens through participation, and create a clean, sustainable, and progressive environment. From rural infrastructure and sanitation to health, education, and digital initiatives, we are working towards improving the standard of living for all residents.
+            At Gram Panchayat Dhanoli, our mission is to promote inclusive growth, empower citizens through participation, and create a clean, sustainable, and progressive environment. From rural infrastructure and sanitation to health, education, and digital initiatives, we are working towards improving the standard of living for all residents.
           </p>
         </motion.div>
       </section>
@@ -66,20 +66,53 @@ export default function AboutPage() {
         </h2>
 
         <div className="space-y-5 text-green-800 text-lg leading-relaxed">
-          <p>
-            <span className="font-bold text-green-900">Established in 1948</span>, Gram Panchayat Dhanoli includes villages such as <span className="font-semibold">Dhanoli, Bidganeshpur, Sukli, Murzhadi, Umri, Khapa, Devapur, Gangapur, and Junapani</span>. As per the 2011 census, the population is around <span className="font-bold">16,529</span>.
-          </p>
-          <p>
-            The Panchayat actively works on rural development projects involving roads, sanitation, education, health camps, and water sustainability initiatives.
-          </p>
-          <hr className="border-green-300" />
-          <p>
-            🔹 Key initiatives include <span className="font-semibold">cementing 90% of village roads</span>, daily waste collection, <span className="font-semibold">CCTV surveillance</span>, and water supply improvements.
-          </p>
-          <p>
-            🔹 The Panchayat manages schools, anganwadis, markets, health centers, banks, post office, and religious sites to uplift the community.
-          </p>
-        </div>
+        <p>
+          <span className="font-bold text-green-900">Dhanoli</span> is a large and progressive
+          village located in
+          <span className="font-semibold"> Hingna Taluka, Nagpur District, Maharashtra</span>.
+          Established in <span className="font-bold">1948</span>, the Gram Panchayat of Dhanoli
+          governs nearby villages such as{" "}
+          <span className="font-semibold">
+            Bidganeshpur, Sukli, Murzhadi, Umri, Khapa, Devapur, Gangapur, and Junapani
+          </span>
+          . As per the 2011 Census, the total population of the Panchayat area is around{" "}
+          <span className="font-bold">16,529</span>.
+        </p>
+
+        <p>
+          The village is well connected by road to Nagpur city and has seen rapid growth in
+          education, agriculture, and small-scale industries. The Panchayat focuses on{" "}
+          <span className="font-semibold">sustainable development</span> through projects related to
+          roads, sanitation, health, clean drinking water, and digital governance.
+        </p>
+
+        <hr className="border-green-300" />
+
+        <p>
+          🔹 Major development initiatives include{" "}
+          <span className="font-semibold">cementing over 90% of internal village roads</span>, daily
+          waste collection, and installation of{" "}
+          <span className="font-semibold">CCTV cameras</span> for better safety and monitoring.
+        </p>
+
+        <p>
+          🔹 The Panchayat also focuses on{" "}
+          <span className="font-semibold">rainwater harvesting</span>, tree plantation drives, and
+          renewable energy usage such as solar street lights.
+        </p>
+
+        <p>
+          🔹 Dhanoli hosts multiple{" "}
+          <span className="font-semibold">primary and secondary schools</span>, anganwadis, a
+          government health center, cooperative banks, post office, and various temples and cultural
+          centers that reflect the rich heritage of the village.
+        </p>
+
+        <p>
+          With strong community participation and effective leadership, Dhanoli has become one of
+          the model villages in the Hingna region, known for cleanliness, unity, and rural progress.
+        </p>
+      </div>
       </section>
 
       {/* ================= Team / Gallery Section ================= */}
@@ -221,29 +254,49 @@ export default function AboutPage() {
       </section>
       <section className="max-w-3xl mx-auto my-10 p-6 rounded-2xl shadow-lg bg-gradient-to-tr from-green-50 via-white to-lime-100 border-l-4 border-green-500">
   <h2 className="text-2xl font-extrabold text-green-900 mb-6 text-center tracking-wide">
-    Major Works by Gram Panchayat Takalghat
+    Major Works by Gram Panchayat Dhanoli
   </h2>
+
   <ul className="list-disc pl-6 space-y-4 text-green-900 text-lg font-medium">
     <li>
-      <span className="font-bold text-green-900">90% concrete road construction completed across the village</span>
+      <span className="font-bold text-green-900">
+        90% of internal village roads concretized
+      </span>{" "}
+      ensuring smooth transport and better connectivity.
     </li>
+
     <li>
-      <span className="font-semibold">Daily garbage collection and management system</span>
+      <span className="font-semibold">
+        Daily garbage collection and solid waste management system
+      </span>{" "}
+      successfully implemented to maintain village cleanliness.
     </li>
+
     <li>
-      <span className="font-semibold">CCTV surveillance</span> installed at Panchayat offices
+      <span className="font-semibold">CCTV surveillance</span> installed at key junctions and Panchayat premises for safety and monitoring.
     </li>
+
     <li>
-      Drinking water supplied through <span className="font-semibold">well schemes and pipelines</span>
+      Continuous <span className="font-semibold">drinking water supply</span> through
+      pipelines, wells, and borewell recharge systems.
     </li>
+
     <li>
-      <span className="font-semibold">Distribution of cycles to differently-abled residents</span>
+      <span className="font-semibold">Rainwater harvesting</span> and{" "}
+      <span className="font-semibold">solar street light installations</span> promoting sustainability.
     </li>
+
     <li>
-      <span className="font-semibold">Mosquito fogging</span> in the village for health and hygiene
+      <span className="font-semibold">Tree plantation drives</span> and green initiatives to
+      enhance environmental balance.
     </li>
+
     <li>
-      Distribution of <span className="font-semibold">garbage bins</span> and <span className="font-semibold">water filters</span> to the community
+      <span className="font-semibold">Health camps and vaccination drives</span> organized regularly for villagers’ well-being.
+    </li>
+
+    <li>
+      Digital record keeping and <span className="font-semibold">online grievance redressal</span> introduced under the Smart Panchayat initiative.
     </li>
   </ul>
 </section>

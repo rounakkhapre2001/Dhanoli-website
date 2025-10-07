@@ -10,25 +10,33 @@ export default function ProGallery() {
   const [images, setImages] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  // 📌 Fetch gallery images from Supabase
+  // Fetch images from Supabase
   const fetchImages = async () => {
+    setLoading(true);
     const { data, error } = await supabase
       .from("gallery")
       .select("image_url")
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("❌ Error fetching gallery:", error);
-    } else {
-      const urls =
-        data?.map(
-          (row) =>
-            supabase.storage.from("gallery").getPublicUrl(row.image_url).data
-              .publicUrl
-        ) || [];
-      setImages(urls);
+      console.error("❌ Error fetching gallery:", error.message);
+      setLoading(false);
+      return;
     }
+
+    const urls =
+      data?.map((row) => {
+        const { data: publicUrlData } = supabase
+          .storage
+          .from("gallery")
+          .getPublicUrl(row.image_url);
+        return publicUrlData?.publicUrl || "";
+      }).filter((url) => url !== "") || [];
+
+    setImages(urls);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -87,44 +95,47 @@ export default function ProGallery() {
         </motion.div>
       </section>
 
-      {/* Gallery Section */}
+      {/* Gallery Grid */}
       <section className="py-16 bg-gradient-to-br from-orange-300 via-white to-green-300">
-        <motion.div
-          className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 md:px-12"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            show: { transition: { staggerChildren: 0.08 } },
-          }}
-        >
-          {images.map((img, idx) => (
-            <motion.div
-              key={idx}
-              className="relative rounded-2xl overflow-hidden shadow-lg cursor-pointer group aspect-square"
-              variants={{
-                hidden: { opacity: 0, scale: 0.9, y: 30, rotate: -2 },
-                show: { opacity: 1, scale: 1, y: 0, rotate: 0 },
-              }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              whileHover={{ scale: 1.05, rotate: 1 }}
-              onClick={() => openLightbox(img, idx)}
-            >
-              <Image
-                src={img}
-                alt={`gallery-${idx}`}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <p className="text-white text-lg font-semibold tracking-wide">
-                  View Image
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        {loading ? (
+          <p className="text-center text-lg font-semibold">Loading images...</p>
+        ) : (
+          <motion.div
+            className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 md:px-12"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.08 } },
+            }}
+          >
+            {images.map((img, idx) => (
+              <motion.div
+                key={idx}
+                className="relative rounded-2xl overflow-hidden shadow-lg cursor-pointer group aspect-square"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9, y: 30, rotate: -2 },
+                  show: { opacity: 1, scale: 1, y: 0, rotate: 0 },
+                }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                whileHover={{ scale: 1.05, rotate: 1 }}
+                onClick={() => openLightbox(img, idx)}
+              >
+                <img
+                  src={img}
+                  alt={`gallery-${idx}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <p className="text-white text-lg font-semibold tracking-wide">
+                    View Image
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         {/* Lightbox */}
         <AnimatePresence>
@@ -167,11 +178,12 @@ export default function ProGallery() {
                   onClick={handleImageClick}
                 >
                   <Image
-                    src={selectedImage}
+                    src={selectedImage!}
                     alt="Selected"
                     width={1400}
                     height={900}
                     className="w-auto max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+                    unoptimized
                   />
                 </motion.div>
               </div>
