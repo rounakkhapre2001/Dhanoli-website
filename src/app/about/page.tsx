@@ -67,7 +67,7 @@ export default function AboutPage() {
 
         <div className="space-y-5 text-green-800 text-lg leading-relaxed">
           <p>
-            <span className="font-bold text-green-900">Established in 1948</span>, Gram Panchayat Takalghat includes villages such as <span className="font-semibold">Takalghat, Bidganeshpur, Sukli, Murzhadi, Umri, Khapa, Devapur, Gangapur, and Junapani</span>. As per the 2011 census, the population is around <span className="font-bold">16,529</span>.
+            <span className="font-bold text-green-900">Established in 1948</span>, Gram Panchayat Dhanoli includes villages such as <span className="font-semibold">Dhanoli, Bidganeshpur, Sukli, Murzhadi, Umri, Khapa, Devapur, Gangapur, and Junapani</span>. As per the 2011 census, the population is around <span className="font-bold">16,529</span>.
           </p>
           <p>
             The Panchayat actively works on rural development projects involving roads, sanitation, education, health camps, and water sustainability initiatives.

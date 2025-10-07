@@ -45,7 +45,7 @@ export default function LeadersSection() {
               viewport={{ once: true }}
             >
               <p className="text-lg font-bold text-green-700 leading-relaxed">
-                The leaders of Takalghat are committed to building a stronger and progressive community. With their guidance, vision, and dedication, they continue to bring innovative development projects, empower villagers through various schemes, and ensure transparency in governance. Their united efforts aim to uplift every family, create sustainable opportunities, and preserve the cultural heritage of the region.
+                The leaders of Dhanoli are committed to building a stronger and progressive community. With their guidance, vision, and dedication, they continue to bring innovative development projects, empower villagers through various schemes, and ensure transparency in governance. Their united efforts aim to uplift every family, create sustainable opportunities, and preserve the cultural heritage of the region.
               </p>
             </motion.div>
           </div>

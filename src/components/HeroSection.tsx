@@ -45,7 +45,7 @@ const HeroSection = () => {
             <circle cx="100" cy="100" r="100" stroke="white" strokeWidth="1" fill="none" />
             <circle cx="100" cy="100" r="60" stroke="white" strokeWidth="1" fill="none" />
             <text fill="white" fontSize="20" letterSpacing="3">
-              <textPath href="#circlePath">Gram Panchayat Takalghat • Village • •</textPath>
+              <textPath href="#circlePath">Gram Panchayat Dhanoli • Village • •</textPath>
             </text>
           </svg>
         </motion.div>
@@ -91,7 +91,7 @@ const HeroSection = () => {
             <circle cx="100" cy="100" r="100" stroke="white" strokeWidth="1" fill="none" />
             <circle cx="100" cy="100" r="60" stroke="white" strokeWidth="1" fill="none" />
             <text fill="white" fontSize="16" letterSpacing="2">
-              <textPath href="#circlePathMobile">Gram Panchayat Takalghat • Village • Takalghat • Village • Takalghat •</textPath>
+              <textPath href="#circlePathMobile">Gram Panchayat Dhanoli • Village • Dhanoli • Village • Dhanoli •</textPath>
             </text>
           </svg>
         </motion.div>
