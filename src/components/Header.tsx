@@ -122,7 +122,7 @@ export default function Header() {
           <Link href="/">
             <div className="flex items-center space-x-2">
               <Image
-                src="/logo.png"
+                src="/"
                 alt="Logo"
                 width={70}
                 height={70}
@@ -161,7 +161,7 @@ export default function Header() {
           <div className="flex items-center space-x-1">
             <Link href="/">
               <Image
-                src="/logo.png"
+                src="/"
                 alt="Logo"
                 width={40} // smaller logo
                 height={40}
