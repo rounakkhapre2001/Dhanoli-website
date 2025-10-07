@@ -106,7 +106,7 @@ export default function ServiceSchemesWithUpcoming() {
     <div className="font-sans">
       {/* ================= Hero Section ================= */}
       <section className="relative w-full h-[800px]">
-        <Image src="/img3.jpg" alt="SERVICES & SCHEMES" fill className="object-cover" priority />
+        <Image src="/bgimg1.jpg" alt="SERVICES & SCHEMES" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
           <motion.h1
             initial={{ opacity: 0, y: -40 }}

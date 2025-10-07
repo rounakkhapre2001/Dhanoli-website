@@ -64,7 +64,7 @@ export default function ProGallery() {
       {/* Hero Section */}
       <section className="relative w-full h-[500px] md:h-[800px] overflow-hidden">
         <Image
-          src="/img3.jpg"
+          src="/bgimg1.jpg"
           alt="Gallery Banner"
           fill
           priority

@@ -85,7 +85,7 @@ export default function Header() {
                     <div className="flex">
                       <div className="w-1/2 p-2 max-w-[40%]">
                         <Image
-                          src="/img90.png"
+                          src="/head.jpg"
                           alt="Dropdown image"
                           width={180}
                           height={180}
@@ -129,7 +129,7 @@ export default function Header() {
                 className="object-contain"
               />
               <span className="text-xl font-bold text-green-800 whitespace-nowrap">
-                Gram Panchayat Takalghat
+              Gram Panchayat Dhanoli
               </span>
             </div>
           </Link>
@@ -169,7 +169,7 @@ export default function Header() {
               />
             </Link>
             <span className="text-sm font-semibold text-green-800">
-              Gram Panchayat Takalghat
+              Gram Panchayat Dhanoli
             </span>
           </div>
 

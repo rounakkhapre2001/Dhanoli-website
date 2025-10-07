@@ -23,7 +23,7 @@ export default function AboutPage() {
     <div className="w-full bg-gradient-to-br from-orange-200 via-white to-green-200">
       {/* ================= Hero Section ================= */}
       <section className="relative w-full h-[500px] md:h-[800px] overflow-hidden">
-        <Image src="/img3.jpg" alt="ABOUT US" fill priority className="object-cover" />
+        <Image src="/bgimg1.jpg" alt="ABOUT US" fill priority className="object-cover" />
         <motion.div
           className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4"
           initial={{ opacity: 0, y: 40 }}
