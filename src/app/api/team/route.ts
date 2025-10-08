@@ -1,85 +1,100 @@
 import { NextResponse } from "next/server";
-import { getSupabaseService } from "@/lib/supabaseClient"; 
+import { supabase } from "@/lib/supabaseClient";
 
-// =================================================================
-// READ (GET)
-// =================================================================
+// GET all members
 export async function GET() {
-    try {
-        const supabaseService = getSupabaseService();
+  try {
+    const { data, error } = await supabase
+      .from("team")
+      .select("*")
+      .order("created_at", { ascending: false });
 
-        const { data, error } = await supabaseService
-            .from("team")
-            .select("*")
-            .order("created_at", { ascending: true });
-
-        if (error) {
-            console.error("Supabase GET Error:", error.message);
-            return NextResponse.json({ error: error.message }, { status: 500 });
-        }
-        return NextResponse.json(data); 
-
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
-      console.error("Unexpected error in GET /api/team:", errorMessage);
-      return NextResponse.json(
-        { error: "Internal Server Error during data fetch: " + errorMessage }, 
-        { status: 500 }
-      );
-    }
+    if (error) throw error;
+    return NextResponse.json(Array.isArray(data) ? data : []);
+  } catch (err: unknown) {
+    return NextResponse.json(
+      { error: (err as Error).message },
+      { status: 500 }
+    );
+  }
 }
 
-// =================================================================
-// CREATE (POST)
-// =================================================================
+// POST: add new member with photo upload
 export async function POST(req: Request) {
-    try {
-        const supabaseService = getSupabaseService(); 
-        
-        const formData = await req.formData();
-        const name = formData.get("name") as string;
-        const role = formData.get("role") as string;
-        const category = formData.get("category") as string;
-        const term = formData.get("term") as string;
-        const description = formData.get("description") as string;
-        const photo = formData.get("photo") as File;
+  try {
+    const formData = await req.formData();
+    const name = formData.get("name") as string;
+    const role = formData.get("role") as string;
+    const category = formData.get("category") as string;
+    const term = formData.get("term") as string;
+    const description = formData.get("description") as string;
+    const file = formData.get("photo") as File | null;
 
-        if (!name || !role || !photo) {
-             return NextResponse.json({ error: "Missing required fields: Name, Role, or Photo." }, { status: 400 });
-        }
-        
-        const BUCKET_NAME = "team-photos";
-        const fileName = `${Date.now()}-${photo.name}`;
-        const filePath = `uploads/${fileName}`;
+    if (!["Elected Members", "Administrative Staff"].includes(category))
+      return NextResponse.json(
+        { error: "Invalid category" },
+        { status: 400 }
+      );
 
-        // 1. Upload Photo (RLS bypass)
-        const fileData = await photo.arrayBuffer();
-        const { error: uploadError } = await supabaseService.storage 
-            .from(BUCKET_NAME)
-            .upload(filePath, new Uint8Array(fileData), {
-                cacheControl: "3600",
-                upsert: false,
-            });
+    let photo_url = "";
 
-        if (uploadError) throw uploadError;
+    if (file) {
+      const fileData = await file.arrayBuffer();
+      const fileName = `${Date.now()}-${file.name}`;
 
-        // 2. Get URL & Insert Data (RLS bypass)
-        const { data: publicUrlData } = supabaseService.storage
-            .from(BUCKET_NAME)
-            .getPublicUrl(filePath);
+      // Upload to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from("team-photos")
+        .upload(fileName, new Uint8Array(fileData), {
+          cacheControl: "3600",
+          upsert: true,
+        });
 
-        const photo_url = publicUrlData?.publicUrl;
+      if (uploadError)
+        return NextResponse.json({ error: uploadError.message }, { status: 500 });
 
-        const { error: dbError } = await supabaseService.from("team").insert([
-            { name, role, category, term, description, photo_url },
-        ]);
-
-        if (dbError) throw dbError; 
-
-        return NextResponse.json({ message: "Member added successfully!" }, { status: 201 });
-    } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : "Unknown error occurred";
-      console.error("POST API Error:", errorMessage);
-      return NextResponse.json({ error: errorMessage }, { status: 500 });
+      const { data: urlData } = supabase.storage
+        .from("team-photos")
+        .getPublicUrl(fileName);
+      photo_url = urlData.publicUrl;
     }
+
+    const { data, error: insertError } = await supabase
+      .from("team")
+      .insert([{ name, role, category, term, description, photo_url }])
+      .select();
+
+    if (insertError)
+      return NextResponse.json({ error: insertError.message }, { status: 500 });
+
+    return NextResponse.json(data[0]);
+  } catch (err: unknown) {
+    return NextResponse.json(
+      { error: (err as Error).message },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE: delete member by ID
+export async function DELETE(req: Request) {
+  try {
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // last part of URL
+
+    if (!id)
+      return NextResponse.json({ error: "ID is required" }, { status: 400 });
+
+    const { error } = await supabase.from("team").delete().eq("id", Number(id));
+
+    if (error)
+      return NextResponse.json({ error: error.message }, { status: 500 });
+
+    return NextResponse.json({ message: "Member deleted successfully" });
+  } catch (err: unknown) {
+    return NextResponse.json(
+      { error: (err as Error).message },
+      { status: 500 }
+    );
+  }
 }
