@@ -112,7 +112,7 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen p-4 sm:p-6">
-      <h1 className="text-xl sm:text-2xl font-bold mb-4 text-[#0B6477]">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 text-[#e1e5e5]">
         Admin Dashboard - Members
       </h1>
 
@@ -197,7 +197,7 @@ export default function AdminPage() {
         </form>
       )}
 
-      <h2 className="text-lg sm:text-2xl font-semibold mt-10 mb-4 text-[#0B6477]">
+      <h2 className="text-lg sm:text-2xl font-semibold mt-10 mb-4 text-[#e8e8e8]">
         Team Members
       </h2>
 

@@ -99,7 +99,7 @@ export default function TeamPage() {
       {/* Hero Section */}
       <section className="relative w-full h-[500px] md:h-[800px]">
         <Image
-          src="/bgimg1.jpg"
+          src="/img3.jpg"
           alt="Our Team"
           fill
           priority

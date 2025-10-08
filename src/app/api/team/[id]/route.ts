@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabaseClient";
 
+// ✅ PATCH: Update member
 export async function PATCH(req: Request) {
   const url = new URL(req.url);
   const id = url.pathname.split("/").pop();
@@ -42,4 +43,38 @@ export async function PATCH(req: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data[0]);
+}
+
+// ✅ DELETE: Remove member
+export async function DELETE(req: Request) {
+  const url = new URL(req.url);
+  const id = url.pathname.split("/").pop();
+
+  if (!id) {
+    return NextResponse.json({ error: "ID missing" }, { status: 400 });
+  }
+
+  // Optional: delete photo from Supabase storage
+  const { data: memberData, error: fetchError } = await supabase
+    .from("team")
+    .select("photo_url")
+    .eq("id", Number(id))
+    .single();
+
+  if (fetchError && fetchError.code !== "PGRST116") {
+    return NextResponse.json({ error: fetchError.message }, { status: 500 });
+  }
+
+  if (memberData?.photo_url) {
+    const filePath = memberData.photo_url.split("/").pop();
+    await supabase.storage.from("team-photos").remove([filePath]);
+  }
+
+  const { error } = await supabase.from("team").delete().eq("id", Number(id));
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true, message: "Member deleted successfully" });
 }
