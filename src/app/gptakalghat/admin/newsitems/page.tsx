@@ -63,7 +63,7 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen p-4">
-      <h1 className="text-2xl font-bold mb-4 text-[#0B6477]">📰 Admin Dashboard - News</h1>
+      <h1 className="text-2xl font-bold mb-4 text-[#dfdfdf]">📰 Admin Dashboard - News</h1>
 
       {!showForm && (
         <button
@@ -124,7 +124,7 @@ export default function NewsPage() {
         )}
       </AnimatePresence>
 
-      <h2 className="text-xl font-bold mb-2">📋 News List</h2>
+      <h2 className="text-xl font-bold mb-2 text-[#ffff]">📋 News List</h2>
       <div className="flex flex-col gap-4">
         {news.map(n => (
           <motion.div

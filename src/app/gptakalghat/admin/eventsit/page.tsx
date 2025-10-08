@@ -140,7 +140,7 @@ export default function Events() {
 
   return (
     <div className="min-h-screen ">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard - Events</h1>
+      <h1 className="text-2xl font-bold mb-4 text-[#dfdfdf]">Admin Dashboard - Events</h1>
       {!showForm && (
         <button
           onClick={() => setShowForm(true)}
@@ -225,7 +225,7 @@ export default function Events() {
       </AnimatePresence>
 
       <div>
-        <h3 className="font-bold text-lg">Events List</h3>
+        <h3 className="font-bold text-lg text-[#dfdfdf]">Events List</h3>
         {events.length === 0 ? (
           <p className="text-gray-500">No events available</p>
         ) : (

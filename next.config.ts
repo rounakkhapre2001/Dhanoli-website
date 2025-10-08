@@ -1,9 +1,13 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: [
-      "ogbczruypiouxumibqdr.supabase.co", // apna Supabase project-ref yahan daalo
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "yrzmbjpfufmtapxrgsji.supabase.co", // 👈 your Supabase project domain
+        port: "",
+        pathname: "/storage/v1/object/public/**", // 👈 allow all public storage paths
+      },
     ],
   },
 };

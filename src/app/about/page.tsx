@@ -252,7 +252,7 @@ export default function AboutPage() {
           </div>
         </motion.div>
       </section>
-      <section className="max-w-3xl mx-auto my-10 p-6 rounded-2xl shadow-lg bg-gradient-to-tr from-green-50 via-white to-lime-100 border-l-4 border-green-500">
+      <section className="max-w-3xl mx-auto mt-10 mb- p-6 rounded-2xl shadow-lg bg-gradient-to-tr from-green-50 via-white to-lime-100 border-l-4 border-green-500 pb-0 !mb-2">
   <h2 className="text-2xl font-extrabold text-green-900 mb-6 text-center tracking-wide">
     Major Works by Gram Panchayat Dhanoli
   </h2>
@@ -300,6 +300,7 @@ export default function AboutPage() {
     </li>
   </ul>
 </section>
+
 
     </div>
   );

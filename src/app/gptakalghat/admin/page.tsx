@@ -83,7 +83,7 @@ export default function DashboardPage() {
     <div className="p-4 sm:p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl sm:text-3xl lg:text-2xl font-bold text-[#0B6477]">
+        <h1 className="text-2xl sm:text-3xl lg:text-2xl font-bold text-[#eaeaea]">
           Welcome to Admin Dashboard 🎉
         </h1>
       </div>
@@ -93,7 +93,7 @@ export default function DashboardPage() {
         {stats.map((stat, i) => (
           <motion.div
             key={i}
-            className="p-6 sm:p-8 lg:p-10 bg-white rounded-2xl shadow border-t-4 border-[#0AD1C8] flex flex-col items-center sm:items-start text-center sm:text-left"
+            className="p-6 sm:p-8 lg:p-10 bg-white rounded-2xl shadow border-t-4 border-[#4f5352] flex flex-col items-center sm:items-start text-center sm:text-left"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.1 }}
