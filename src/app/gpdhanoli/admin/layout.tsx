@@ -59,12 +59,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
 
   const navItems = [
-    { name: "Dashboard", href: "/gptakalghat/admin", icon: Home },
-    { name: "Contacts", href: "/gptakalghat/admin/contacts", icon: Mail },
-    { name: "Gallery", href: "/gptakalghat/admin/gallery", icon: ImageIcon },
-    { name: "Team", href: "/gptakalghat/admin/team", icon: Users },
-    { name: "News", href: "/gptakalghat/admin/newsitems", icon: Newspaper },
-    { name: "Events", href: "/gptakalghat/admin/eventsit", icon: BsSoundwave },
+    { name: "Dashboard", href: "/gpdhanoli/admin", icon: Home },
+    { name: "Contacts", href: "/gpdhanoli/admin/contacts", icon: Mail },
+    { name: "Gallery", href: "/gpdhanoli/admin/gallery", icon: ImageIcon },
+    { name: "Team", href: "/gpdhanoli/admin/team", icon: Users },
+    { name: "News", href: "/gpdhanoli/admin/newsitems", icon: Newspaper },
+    { name: "Events", href: "/gpdhanoli/admin/eventsit", icon: BsSoundwave },
   ];
   
   if (loading) {

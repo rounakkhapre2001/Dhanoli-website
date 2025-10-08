@@ -18,7 +18,7 @@ const Footer = () => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => setIsClient(true), []);
-  if (!isClient || pathname?.startsWith("/gptakalghat/admin")) return null;
+  if (!isClient || pathname?.startsWith("/gpdhanoli/admin")) return null;
 
   return (
     <motion.footer

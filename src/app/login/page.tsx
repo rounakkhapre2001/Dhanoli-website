@@ -20,7 +20,7 @@ export default function LoginPage() {
     async function checkSession() {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
-        router.push("/gptakalghat/admin");
+        router.push("/gpdhanoli/admin");
       }
     }
     checkSession();
@@ -41,7 +41,7 @@ export default function LoginPage() {
     if (error) {
       setError(error.message);
     } else if (data.session?.user) {
-      router.push("/gptakalghat/admin");
+      router.push("/gpdhanoli/admin");
     }
   };
 

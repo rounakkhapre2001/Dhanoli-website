@@ -38,7 +38,7 @@ export default function Header() {
   ];
 
   // Hide header on admin routes or until client is ready
-  if (!isClient || pathname?.startsWith("/gptakalghat/admin")) return null;
+  if (!isClient || pathname?.startsWith("/gpdhanoli/admin")) return null;
 
   return (
     <motion.header
